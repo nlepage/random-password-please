@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+        navigator.serviceWorker.register('sw.js')
+          .then(registration => {
+            const serviceWorker = registration.installing ?? registration.waiting ?? registration.active
+            if (serviceWorker.state === 'activated') {
+              document.location.reload()
+            } else {
+              serviceWorker.addEventListener('statechange', e => {
+                if (e.target.state === 'activated') document.location.reload()
+              })
+            }
+          })
+    </script>
+  </head>
+  <body>
+    Loading...
+  </body>
+</html>
